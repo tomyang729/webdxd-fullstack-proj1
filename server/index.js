@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var cors = require('cors');
+var bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://localhost/webdxd');
 
@@ -17,6 +18,7 @@ var Student = mongoose.model('Student', studentSchema, 'student');
 var app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 
 
 app.get('/', function(req, res){
@@ -34,5 +36,15 @@ app.get('/student/:id', function(req, res){
 		res.send(doc);
 	})
 });
+
+app.post('/new', function (req, res) {
+
+	var newStudent = new Student(req.body);
+
+	newStudent.save(function (err, doc) {
+		res.send(doc);
+	});
+
+})
 
 app.listen(3000);
