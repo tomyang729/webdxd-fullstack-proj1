@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WebDxD Student</title>
+</head>
+<body ng-app="Webdxd" ng-controller="AppCtrl as app">
+
+	<div ng-repeat="student in app.student">
+		<h1 ng-click="app.selectStudent(student)">{{student.firstname}}
+		</h1>
+	</div>
+
+	<hr>
+	<h2>Details:</h2>
+
+	<div>
+		<h2 ng-show="app.fullName">Name: {{app.fullName}}</h2>
+
+		<h2 ng-show="app.email">Email: {{app.email}}</h2>
+
+		<h2 ng-show="app.age">Age: {{app.age}}</h2>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+	<script src="app.js" type="text/javascript"></script>
+</body>
+</html>
