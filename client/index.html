@@ -23,13 +23,20 @@
 		<h2 ng-show="app.age">Age: {{app.age}}</h2>
 	</div>
 
-	<form novalidate ng-show="app.flag">
+	<form novalidate name="myForm" ng-show="app.flag">
 
 		<input type="text" name="firstname" placeholder="First Name" ng-model="app.newStudent.firstname">
 		<input type="text" name="lastname" placeholder="Last Name" ng-model="app.newStudent.lastname">
 		<input type="email" name="email" placeholder="Email" ng-model="app.newStudent.email">
 		<input type="number" name="age" placeholder="Age" ng-model="app.newStudent.age">
 		<button ng-click="app.submitForm()">Submit</button>
+		<br>
+		<span ng-show="myForm.input.$error.required">
+        Required!
+        </span>
+		<span ng-show="myForm.input.$error.email">
+        Not a valid email!
+        </span>
 
 	</form>
 
