@@ -1,7 +1,11 @@
 var Student = React.createClass({
 
+    handleClick: function() {
+        this.props.updateStu(this.props.student);
+    },
+
     render: function () {
-        return <div>{this.props.student.firstname}</div>;
+        return <h1 onClick={this.handleClick}>{this.props.student.firstname}</h1>;
     }
 });
 
@@ -9,7 +13,9 @@ var StudentList = React.createClass({
 
     getInitialState: function () {
         return {
-            studentList: []
+            studentList: [],
+            showDetails: false,
+            selectedStu: {}
         }
     },
 
@@ -28,20 +34,48 @@ var StudentList = React.createClass({
             });
     },
 
-    handleClick() {
-        //TODO
+    updateStudent: function(stu) {
+        console.log('123');
+        this.setState({showDetails: true, selectedStu: stu});
     },
 
+
+
+    render: function () {
+        var stu = this.state.selectedStu;
+        var ReactThis = this;
+        return (
+            <div>
+                <div>
+                    {
+                        this.state.studentList.map(function(student) {
+                            return <Student updateStu={ReactThis.updateStudent} student={student} key={student._id}/>
+                        })
+                    }
+                </div>
+                <div>
+                    <hr/>
+                    <h3>Details: </h3>
+                    <br/>
+                </div>
+                <div>
+                    {
+                        this.state.showDetails ? <Detail stu={stu}/> : null
+                    }
+                </div>
+
+            </div>
+        );
+    }
+});
+
+var Detail = React.createClass({
     render: function () {
         return (
             <div>
-                {
-                    this.state.studentList.map(function(student) {
-                        console.log(student);
-                        return <Student onClick={this.handleClick} student={student} key={student._id}/>
-                    })
-                }
-
+                <h2>Name:  {this.props.stu.firstname} {this.props.stu.lastname}</h2>
+                <h2>Email: {this.props.stu.email}</h2>
+                <h2>Age:   {this.props.stu.age}</h2>
             </div>
         );
     }

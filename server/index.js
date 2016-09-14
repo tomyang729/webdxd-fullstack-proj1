@@ -26,7 +26,7 @@ app.get('/', function(req, res){
 })
 
 app.get('/student', function(req, res){
-	Student.find().select('firstname age').exec(function(err, doc){
+	Student.find().select('firstname lastname age email').exec(function(err, doc){
 		res.send(doc);
 	})
 });
